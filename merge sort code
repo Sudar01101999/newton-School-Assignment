@@ -1,0 +1,52 @@
+# merge sort 
+package com.s;
+
+public class Main {
+
+    public static void main(String[] args) {
+int a[]={6,9,3,1,5,33,89};
+int n=a.length-1;
+divide(a,0,n);
+for(int i=0;i<n;i++){
+    System.out.println(a[i]);
+}
+        System.out.println();
+
+    }
+
+    static void divide(int a[], int si, int ei) {
+        if (si <= ei) {
+            return;
+        }
+        int mi = (si + ei) / 2;
+        divide(a, mi + 1, ei);
+        divide(a, si, ei);
+        conquar(a, si, mi, ei);
+    }
+
+    static void conquar(int a[], int si, int mi, int ei) {
+        int merged[] = new int[ei - si + 1];
+        int indx1 = si;
+        int indx2 = mi + 1;
+        int x = 0;
+        while (indx1 <= mi && indx2 <= ei) {
+            if (a[indx1] <=a[indx2]) {
+                merged[x++] = a[indx1++];
+
+            } else {
+                merged[x++] = a[indx2++];
+            }
+        } while (indx1 <= mi) {
+            merged[x++] = a[indx1++];
+        }
+        while (indx2 <= ei) {
+            merged[x++] = a[indx1++];
+        }
+
+
+        for (int i = 0, j = si; i < merged.length; i++, j++) {
+            a[j] = merged[i];
+        }
+
+    }
+}
